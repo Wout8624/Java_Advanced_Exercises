@@ -1,8 +1,8 @@
 package be.pxl.musicplaylist.api;
 
 
+import jakarta.validation.Valid;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class MusicPlaylistController {
     }
 
     @PostMapping(path = "/add")
-    public void addSong(@RequestBody Song song) {
+    public void addSong(@RequestBody @Valid Song song) {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Adding song [" + song.getTitle() + "]");
         }
@@ -48,7 +48,7 @@ public class MusicPlaylistController {
     }
 
     @PutMapping("/{index}")
-    public void updateSong(@PathVariable int index, @RequestBody Song song) {
+    public void deleteSong(@PathVariable int index, @RequestBody @Valid Song song) {
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Updating song: ['" + song.getTitle() + "'] ...");
         }
@@ -56,7 +56,7 @@ public class MusicPlaylistController {
     }
 
     @DeleteMapping("/{index}")
-    public void updateSong(@PathVariable int index){
+    public void deleteSong(@PathVariable int index){
         if (LOGGER.isInfoEnabled()) {
             LOGGER.info("Deleting song");
         }
