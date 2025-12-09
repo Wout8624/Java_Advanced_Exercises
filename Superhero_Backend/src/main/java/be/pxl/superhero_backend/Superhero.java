@@ -1,12 +1,11 @@
 package be.pxl.superhero_backend;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "superheroes")
@@ -18,7 +17,10 @@ public class Superhero {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String superheroName;
+    @ManyToMany
+    private List<Mission> missions = new ArrayList<>();
 
     public Superhero() {
         //JPAonly
@@ -30,4 +32,8 @@ public class Superhero {
         this.superheroName = superheroName;
     }
 
+    @Override
+    public String toString() {
+        return superheroName;
+    }
 }
